@@ -29,9 +29,9 @@ The raw data is already in 1NF. The composite primary key is: `(Area Code, Item 
 
 **Action taken:**
 
-1. Area : depends only on `Area Code`. I moved this to a new **COUNTRY** table.
-2. Item :depends only on `Item Code`. I moved this to a new **ITEM** table.
-3. Element : and `Unit` depend only on `Element Code`. I moved these to a new **ELEMENT** table.
+1. Area : depends only on Area Code. I moved this to a new **COUNTRY** table.
+2. Item :depends only on Item Code. I moved this to a new **ITEM** table.
+3. Element : and Unit depend only on Element Code. I moved these to a new **ELEMENT** table.
 4. Flag: depends only on the flag code. I moved this to a new **FLAG** table.
 
 **Remaining Fact Table (PRODUCTION_FACT):**
