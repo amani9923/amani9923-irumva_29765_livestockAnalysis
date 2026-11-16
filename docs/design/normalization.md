@@ -19,7 +19,7 @@ The raw data downloaded from FAOSTAT is a single wide table. It contains repeati
 ## 2. First Normal Form (1NF)
 
 **Rule:** Remove repeating groups, ensure every column holds a single atomic value.
-The raw data is already in 1NF. The composite primary key is: `(Area Code, Item Code, Element Code, Year)`.
+The raw data is already in 1NF. The composite primary key is: (Area Code, Item Code, Element Code, Year).
 *No dependency removed yet.*
 
 
@@ -45,7 +45,7 @@ The raw data is already in 1NF. The composite primary key is: `(Area Code, Item 
 **Rule:** Remove transitive dependencies (non-key columns depending on other non-key columns).
 
 **Action taken:**
-1. In the **ITEM** table, the item name `"Raw milk of cattle"` implies a species (Cattle) and a product (Milk). I created **SPECIES** and **PRODUCT** tables.
+1. In the **ITEM** table, the item name "Raw milk of cattle" implies a species (Cattle) and a product (Milk). I created **SPECIES** and **PRODUCT** tables.
 2. In the **ELEMENT** table, the Unit is directly tied to the element (e.g., Production is always in tonnes). I created a **UNIT** table to store unit names properly.
 
 **Final Table Structure (8 Tables):**
