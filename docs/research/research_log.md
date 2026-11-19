@@ -1,68 +1,12 @@
 
-Source (APA)         and               Type    and                  Link                                                    
+Thornton (2010), in the research paper Livestock Production: Recent Trends, Future Prospects, published in Philosophical Transactions of the Royal Society B, explains that livestock demand and production are changing rapidly across the world. The study highlights the importance of improving livestock production to meet future food demands. It also shows the need for reliable data to monitor and evaluate livestock productivity. However, many existing systems lack structured productivity indicators that can help farmers and livestock managers measure and compare production performance. The study is available at https://doi.org/10.1098/rstb.2010.0134.
 
-Thornton, P. K. (2010). 
-Livestock production:              Research paper         https://doi.org/10.1098/rstb.2010.0134    
-recent trends, future prospects. 
-Philosophical Transactions of 
-the Royal Society B, 
-365(1554), 2853–2867.
+Herrero et al. (2013), in their research paper Biomass Use, Production, Feed Efficiencies, and Greenhouse Gas Emissions from Global Livestock Systems, published in Proceedings of the National Academy of Sciences (PNAS), examine livestock production, feed use, and efficiency across different livestock systems. The study shows that feed efficiency and productivity vary widely depending on the livestock production system. This highlights the importance of monitoring feed consumption and production performance. However, local databases often lack the necessary tools to analyse and compare livestock productivity and feed efficiency. The research is available at https://doi.org/10.1073/pnas.1308149110.
 
-Herrero, M., et al. (2013). 
-Biomass use, 
-production, 
-feed efficiencies, and             Research paper        https://doi.org/10.1073/pnas.1308149110
-greenhouse gas 
-emissions from 
-global livestock
-systems.
-PNAS, 110(52), 20888–20893.
+The Food and Agriculture Organization (FAO, 2023), in its report World Food and Agriculture – Statistical Yearbook 2023, provides important agricultural and livestock statistics used to monitor food production and food security around the world. The report demonstrates that reliable livestock statistics are essential for understanding production trends and supporting agricultural planning. However, national statistical tables are not always easy to search, analyse, or audit. This creates a need for systems that organize livestock information and make productivity analysis easier. The report is available at https://www.fao.org/documents/card/en/c/cc8166en.
 
-FAO. (2023). World Food and         Report/statistic      https://www.fao.org/documents/card/en/c/cc8166en
-Agriculture –                      
-Statistical Yearbook 2023.
-Rome: FAO
+FAOSTAT (2024), through its Livestock Production Database, provides statistical information about livestock production across different countries and years. The database allows users to access and compare livestock production information. It is useful for understanding general production trends and supporting agricultural research. However, the database mainly provides aggregated information and does not function as a local livestock productivity analysis system. Therefore, there is a need for a system that can manage detailed livestock records and analyse productivity at the farm or local level. The database is available at https://www.fao.org/faostat/en/#data/QCL.
 
-FAOSTAT. (2024). FAOSTAT          Existing system          https://www.fao.org/faostat/en/#data/QCL        
-database: 
-Livestock production.
+The Food and Agriculture Organization (FAO, 2024), through its FAOSTAT Crops and Livestock Products (QCL) dataset, provides agricultural and livestock production data, including area, item, element, year, unit, value, and data flags. This dataset can support livestock production research and statistical analysis. However, the data may require cleaning, organization, and normalization before it can be used effectively for detailed productivity analysis. This creates an opportunity to develop a system that processes livestock data and presents useful production information to support decision-making. The dataset is available at https://www.fao.org/faostat/en/#data/QCL.
 
-FAO. (2024). FAOSTAT Crops
-and 
-Livestock Products               Dataset                  https://www.fao.org/faostat/en/#data/QCL
-(QCL) [Data set].
-
-Oracle. (2024). Oracle 
-Database PL/SQL                 Technical source           https://docs.oracle.com/en/database/oracle/oracle-database/23/lnpls/
-Language Reference, 23c.
-
-
-
-
-Key finding                         and                           Gap it shows
-
-Livestock demand and production are                          Many systems lack structured productivity indicators.
-changing rapidly; productivity analysis 
-needs reliable data.
-
-
-Feed efficiency and productivity                            Local databases rarely support efficiency/productivity comparison.
-vary widely across livestock systems
-
-
-Livestock statistics are essential                          National tables are not easy to query or audit.
-for food-security monitoring.
-
-
-FAOSTAT provides comparable                                 It is mostly aggregate; it is not a local productivity analysis system.
-livestock production data.
-
-Dataset contains area, item, 
-element, year, unit, value                                  Needs cleaning, normalization and analytical logic.
-and flag.
-
-PL/SQL supports
-procedures,                                                Implementation must be designed carefully with validation and auditing.
-functions, 
-packages, cursors, triggers and exceptions.
-
+Oracle (2024), in its Oracle Database PL/SQL Language Reference, 23c, explains the use of PL/SQL for developing database applications. It describes important programming features such as procedures, functions, packages, cursors, triggers, and exception handling. These features can support the development of a Livestock Production and Productivity Analysis System by helping manage records, perform calculations, validate information, and maintain database operations. However, successful implementation requires careful system design, data validation, and auditing to ensure that information is accurate and reliable. The documentation is available at https://docs.oracle.com/en/database/oracle/oracle-database/23/lnpls/.
