@@ -1,5 +1,5 @@
 
-Source (APA)                       Type                    Link                                                    
+Source (APA)         and               Type    and                  Link                                                    
 
 Thornton, P. K. (2010). 
 Livestock production:              Research paper         https://doi.org/10.1098/rstb.2010.0134    
@@ -39,7 +39,7 @@ Language Reference, 23c.
 
 
 
-Key finding                                                    Gap it shows
+Key finding                         and                           Gap it shows
 
 Livestock demand and production are                          Many systems lack structured productivity indicators.
 changing rapidly; productivity analysis 
