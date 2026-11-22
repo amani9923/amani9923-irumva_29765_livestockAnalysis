@@ -1,1 +1,7 @@
-
+Slide 1: Project Title
+Livestock Production and Productivity Analysis System is
+a database application project that focuses on managing and analysing 
+livestock production and productivity information in Rwanda. The project will use
+Oracle Database and PL/SQL to store, organize, validate, and process livestock production records. 
+Oracle APEX will be used to develop a user-friendly interface where users can enter data, 
+search for information, view reports, and understand livestock production trends
