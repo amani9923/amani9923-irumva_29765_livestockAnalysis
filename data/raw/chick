@@ -1,1 +1,80 @@
+""Phase II, Task 2: data quality counts for a FAOSTAT download (QCL domain).
+
+Usage:   python faostat_quality_check.py "data/raw/FAOSTAT_data_en_11-16-2026 (1).csv"
+Needs:   pip install pandas
+It only READS the file. It never changes it (Phase II: do not fix anything).
+"""
+import sys
+import pandas as pd
+
+path = sys.argv[1]
+# Read everything as text so we see how values are really stored. sep=None detects comma/tab.
+df = pd.read_csv(path, sep=None, engine="python", dtype=str, keep_default_na=False)
+df.columns = [c.strip() for c in df.columns]
+n = len(df)
+
+print(f"File: {path}")
+print(f"Rows: {n} | Columns: {df.shape[1]}")
+print("Column names:", list(df.columns))
+
+print("\n--- Coverage ---")
+for col in ["Domain", "Area", "Element", "Unit", "Flag"]:
+    vc = df[col].value_counts()
+    print(f"{col}: {len(vc)} distinct ->", vc.to_dict())
+print("Item: distinct =", df["Item"].nunique())
+print("Year range:", df["Year"].min(), "to", df["Year"].max())
+
+print("\n--- Completeness ---")
+blank = df.apply(lambda c: c.str.strip() == "").sum()
+print("Blank cells per column:", {c: int(v) for c, v in blank.items() if v})
+val_blank = df["Value"].str.strip() == ""
+print("Blank Value:", int(val_blank.sum()))
+print("  of which flagged M (missing):", int((val_blank & (df["Flag"] == "M")).sum()))
+print("Blank Value rows by Area:", df[val_blank]["Area"].value_counts().to_dict())
+print("Non-blank Note values:", int((df["Note"].str.strip() != "").sum()),
+      df[df["Note"].str.strip() != ""]["Note"].value_counts().to_dict())
+
+print("\n--- Duplicates ---")
+print("Fully duplicate rows:", int(df.duplicated().sum()))
+key = ["Area Code (M49)", "Element Code", "Item Code (CPC)", "Year"]
+print("Duplicate (Area, Element, Item, Year) keys:", int(df.duplicated(subset=key).sum()))
+
+print("\n--- Types and formats ---")
+val = pd.to_numeric(df["Value"].where(~val_blank), errors="coerce")
+print("Value non-numeric text (excluding blanks):", int((val.isna() & ~val_blank).sum()))
+print("Value negative:", int((val < 0).sum()), "| Value equal to 0:", int((val == 0).sum()))
+print("Item Code with leading zero (damaged by number conversion):",
+      int(df["Item Code (CPC)"].str.match(r"^0\d").sum()),
+      "| distinct:", df.loc[df["Item Code (CPC)"].str.match(r"^0\d"), "Item Code (CPC)"].nunique())
+print("Item Code with decimal point (e.g. 21111.01):",
+      int(df["Item Code (CPC)"].str.contains(r"\.", regex=True).sum()),
+      "| distinct:", df.loc[df["Item Code (CPC)"].str.contains(r"\.", regex=True), "Item Code (CPC)"].nunique())
+for c in ["Area Code (M49)", "Element Code", "Year Code", "Year"]:
+    ok = pd.to_numeric(df[c], errors="coerce").notna().sum()
+    print(f"{c}: {int(ok)} of {n} numeric-looking (stored as text in the file)")
+print("Year Code differs from Year:", int((df["Year Code"] != df["Year"]).sum()), "(0 = redundant column)")
+print("Constant columns (same value on every row):",
+      [c for c in df.columns if df[c].nunique() == 1])
+
+print("\n--- Mixed units ---")
+units_per_item = df.groupby("Item")["Unit"].nunique()
+print("Items reported in more than one unit:", int((units_per_item > 1).sum()),
+      list(units_per_item[units_per_item > 1].index))
+print("Rows per Element/Unit:", df.groupby(["Element Code", "Element", "Unit"]).size().to_dict())
+
+print("\n--- Spelling variants ---")
+for col in ["Area", "Item", "Flag Description"]:
+    raw_n = df[col].nunique()
+    norm_n = df[col].str.strip().str.lower().str.replace(r"\s+", " ", regex=True).nunique()
+    print(f"{col}: {raw_n} distinct, {norm_n} after case/space normalising -> {raw_n - norm_n} variants")
+
+print("\n--- Dependency probes (for normalisation later; 0 violations = real dependency) ---")
+def fd(a, b):
+    g = df.groupby(a)[b].nunique()
+    return int((g > 1).sum()), int(g.shape[0])
+for a, b in [("Area Code (M49)", "Area"), ("Item Code (CPC)", "Item"),
+             ("Element Code", "Element"), ("Element Code", "Unit"),
+             ("Flag", "Flag Description"), ("Year", "Year Code")]:
+    bad, total = fd(a, b)
+    print(f"{a} -> {b}: {bad} violating groups of {total}")
 
