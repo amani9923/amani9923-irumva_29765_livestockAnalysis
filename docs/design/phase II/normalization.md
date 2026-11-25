@@ -41,3 +41,25 @@ Final Table Structure (8 Tables):
    HEALTH_INTERVENTIONS (Intervention_ID, Tag_ID, Vet_ID, Intervention_Date, Treatment, Dosage)
    BREEDING_LOG (Breeding_ID, Dam_ID, Sire_ID, Insemination_Date, Pregnancy_Check_Date, Expected_Birth_Date)
    FEED_CONSUMPTION (Feed_Log_ID, Unit_ID, Feed_Date, Feed_Type, Amount_kg, Cost)
+
+
+
+
+
+
+
+
+
+
+
+
+    5. Raw Field Mapping Checklist
+| Raw CSV Column | Target Table.Column | Action |
+|---|---|---|
+| Cattle_ID | LIVESTOCK_REGISTRY.Tag_ID | Direct mapping (String to Varchar) |
+| Breed | BREED.Breed_Name | Map to Breed_ID |
+| Farm_ID | FARM_UNITS.Unit_ID | Direct mapping |
+| Date | PRODUCTION_LOG.Log_Date | Convert Text (MM/DD/YYYY) to DATE |
+| Feed_Type | FEED_CONSUMPTION.Feed_Type | Direct mapping |
+| Feed_Quantity_kg | FEED_CONSUMPTION.Amount_kg | Convert to NUMBER |
+| Milk_Yield_L | PRODUCTION_LOG.Milk_Yield | Convert to NUMBER |
