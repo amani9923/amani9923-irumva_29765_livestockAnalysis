@@ -5,7 +5,7 @@ The raw Kaggle dataset is a single wide table. It repeats animal profile informa
 
 Sample Raw Data (UNF):
 | Cattle_ID | Breed | Age_Months | Farm_ID | Date | Feed_Type | Feed_Quantity_kg | Milk_Yield_L |
-|---|---|---|---|---|---|---|---|
+
 | CATTLE_000001 | Tharparkar | 32 | FARM_0825 | 2/6/2023 | Hay | 16.8 | 3.08 |
 | CATTLE_000002 | Africander | 63 | FARM_0106 | 10/31/2022 | Dry_Fodder | 8.9 | 2.0 |
 
