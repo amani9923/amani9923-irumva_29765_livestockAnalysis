@@ -6,3 +6,24 @@
 * **Normalization Document:** [docs/design/normalization.md](docs/design/normalization.md)
 * **Logical ERD:** [docs/design/erd.png](docs/design/erd.png)
 * **Data Dictionary:** [docs/design/data_dictionary.md](docs/design/data_dictionary.md)
+
+
+
+
+Phase III
+
+## Phase III — Database (PDB) Creation
+
+**SQL Scripts (database/setup/):**
+* [01_create_pdb.sql](database/setup/01_create_pdb.sql)
+* [02_create_user.sql](database/setup/02_create_user.sql)
+* [03_tablespaces.sql](database/setup/03_tablespaces.sql)
+* [04_archive_log.sql](database/setup/04_archive_log.sql)
+* [05_verify.sql](database/setup/05_verify.sql)
+
+**Evidence Screenshots:**
+* [PDB Creation Proof](database/Screenshot/01_create_pdb.PNG)
+* [User Creation Proof](database/Screenshot/02_creater_user.png)
+* [Tablespace Creation Proof](database/Screenshot/Q3_tablespace_creation.png)
+* [Archive Log Mode Proof](database/Screenshot/04_archive_log.png)
+* [Verification Output](database/Screenshot/05_verify.png)
