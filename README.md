@@ -1,14 +1,11 @@
 # amani9923-irumva_29765_LIVESTOCK PRODUCTION AND PRODUCTIVITY MANAGEMENT SYSTEM
 ## Phase II — Data Sourcing, Normalization and Logical Design
 
-* **Raw Data:** `data/raw/FAOSTAT_data_en_11-16-2026.csv`
+* **Raw Data:** [data/raw/global_cattle_milk_yield_prediction_dataset.csv](data/raw/global_cattle_milk_yield_prediction_dataset.csv)
 * **Dataset Card:** [data/dataset_card.md](data/dataset_card.md)
-* **Normalization Document:** [docs/design/normalization.md](docs/design/normalization.md)
-* **Logical ERD:** [docs/design/erd.png](docs/design/erd.png)
-* **Data Dictionary:** [docs/design/data_dictionary.md](docs/design/data_dictionary.md)
-
-
-
+* **Normalization Document:** [docs/design/phase II/normalization.md](<docs/design/phase II/normalization.md>)
+* **Logical ERD:** [docs/design/phase II/ERD.png](<docs/design/phase II/ERD.png>)
+* **Data Dictionary:** [docs/design/phase II/data_dictionary.md](<docs/design/phase II/data_dictionary.md>)
 
 Phase III
 
