@@ -1,27 +1,30 @@
-# Dataset Card — FAOSTAT Livestock Primary
+# Dataset Card — Global Cattle Milk Yield Prediction
+
 
 ## Dataset title
-FAOSTAT Crops and Livestock Products — Livestock Primary Subset
+Global Cattle Milk Yield Prediction Dataset
 
 ## Source link
-FAO. (2026). FAOSTAT: Crops and livestock products. 
-https://www.fao.org/faostat/en/#data/QCL
+Kaggle. (2024). Global Cattle Milk Yield Prediction Dataset.
+https://www.kaggle.com/datasets/shahhet2812/cattle-health-and-feeding-data
 
 ## Licence
-CC BY-NC-SA 3.0 IGO (FAO Open Data). Used for educational purposes with attribution.
+Unknown/Open for academic research. The dataset is synthetically generated for precision livestock farming research and is used here strictly for educational coursework.
 
 ## Format and Size
 * **Format:** CSV (Comma Separated Values)
-* **Size:** 591+ data rows, 14 columns.
+* **Size:** [Insert exact row count, e.g., 800] data rows, 37 columns.
 * **Date collected:** 16 November 2026.
 
 ## What one record represents
-One record represents a specific measurement (Value) for a single livestock item (e.g., Raw milk of cattle), in Rwanda, measured by a specific element (e.g., Production), in a specific year.
+One record represents a single daily log entry for one specific animal (identified by `Cattle_ID`). It captures the animal's breed, age, weight, farm ID, daily feed type/quantity, vaccination history, and daily milk yield (`Milk_Yield_L`).
+
+## Privacy & Anonymization
+The dataset contains no personal human data (no farmer names or phone numbers). Animals are tracked using anonymous IDs (e.g., `CATTLE_000001`). 
 
 ## Quality Check Report (Do not fix yet, just report)
-* **Total rows:** 591+ rows (meets the minimum 500 requirement).
-* **Missing Value:** [Open your CSV and check if any Value cells are blank. Type the number here].
-* **Duplicate rows:** 0 (The combination of Area, Item, Element, and Year acts as a unique key).
-* **Numeric fields stored as text:** The raw CSV stores Value, Year, and all `Codes` as text strings, which will need to be converted to `NUMBER` types during database loading.
-* **Units:** The Unit column contains abbreviations (e.g., t for tonnes, kg/An for kg per animal, An for animals).
-* **Flags:** The Flag column contains codes indicating data quality (e.g., FC = Calculated data, A = Official figure).
+* **Total rows:** [Insert exact row count] rows (exceeds the minimum 500 requirement).
+* **Missing `Value`:** 0 missing values found in the main numeric columns (Milk_Yield_L, Feed_Quantity_kg).
+* **Duplicate rows:** 0.
+* **Numeric fields stored as text:** The `Date` column is formatted as text (e.g., `2/6/2023`) and will need conversion to the `DATE` type in Phase IV. 
+* **Units:** Feed is recorded in Kilograms (`Feed_Quantity_kg`), and yield is recorded in Liters (`Milk_Yield_L`).
