@@ -22,7 +22,7 @@ One record represents a single daily log entry for one specific animal (identifi
 ## Privacy & Anonymization
 The dataset contains no personal human data (no farmer names or phone numbers). Animals are tracked using anonymous IDs (e.g., `CATTLE_000001`). 
 
-## Quality Check Report (Do not fix yet, just report)
+## Quality Check Report 
 * **Total rows:** [Insert exact row count] rows (exceeds the minimum 500 requirement).
 * **Missing `Value`:** 0 missing values found in the main numeric columns (Milk_Yield_L, Feed_Quantity_kg).
 * **Duplicate rows:** 0.
