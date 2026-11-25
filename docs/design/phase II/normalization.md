@@ -49,11 +49,12 @@ Final Table Structure (8 Tables):
 
 
 
+ Raw Field Mapping Checklist
 
 
 
 
-    5. Raw Field Mapping Checklist
+    
 | Raw CSV Column | Target Table.Column | Action |
 |---|---|---|
 | Cattle_ID | LIVESTOCK_REGISTRY.Tag_ID | Direct mapping (String to Varchar) |
