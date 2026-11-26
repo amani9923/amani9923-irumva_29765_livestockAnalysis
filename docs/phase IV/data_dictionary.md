@@ -1,50 +1,49 @@
-# Phase IV — Data Dictionary and Table Justifications
+ Phase IV — Data Dictionary and Table Justifications
 
-## 1. Table Design & Normalization Justifications
+ 1. Table Design & Normalization Justifications
 
-**FARM_UNITS**
-*   **Purpose:** Stores the physical locations/barns where cattle are housed.
-*   **Normalization (3NF):** Location details depend solely on the Unit_ID. Storing this separately prevents repeating the location for every single animal or feed log, removing transitive dependencies.
-*   **Keys:** Uses a Natural Primary Key (`unit_id`) because the Farm_ID from the raw data is already a unique, stable identifier.
+FARM_UNITS
+Purpose: Stores the physical locations/barns where cattle are housed.
+Normalization (3NF):Location details depend solely on the Unit_ID. Storing this separately prevents repeating the location for every single animal or feed log, removing transitive dependencies.Keys:Uses a Natural Primary Key (unit_id) because the Farm_ID from the raw data is already a unique, stable identifier.
 
-**BREED**
-*   **Purpose:** Lookup table for cattle breeds (e.g., Holstein, Jersey).
-*   **Normalization (3NF):** In the raw data, the breed name was tied directly to the animal. By creating this table, `breed_name` depends only on `breed_id`, removing the transitive dependency (Breed Name -> Breed ID -> Animal).
-*   **Keys:** Surrogate Primary Key (`breed_id`). `breed_name` must be UNIQUE to prevent duplicate breed entries.
+BREED
+Purpose: Lookup table for cattle breeds (e.g., Holstein, Jersey).
+Normalization (3NF): In the raw data, the breed name was tied directly to the animal. By creating this table, breed_name depends only on breed_id, removing the transitive dependency (Breed Name -> Breed ID -> Animal).
+Keys: Surrogate Primary Key (`breed_id`).breed_name must be UNIQUE to prevent duplicate breed entries.
 
-**VETERINARIAN**
-*   **Purpose:** Stores details of doctors who perform medical interventions.
-*   **Normalization (3NF):** Vet details depend on `vet_id`, not on the animal receiving the treatment. This removes partial/transitive dependencies from the health log.
-*   **Keys:** Surrogate Primary Key (`vet_id`). `license_number` is UNIQUE because no two vets can share a medical license.
+VETERINARIAN
+Purpose: Stores details of doctors who perform medical interventions.
+Normalization (3NF): Vet details depend on vet_id, not on the animal receiving the treatment. This removes partial/transitive dependencies from the health log.
+Keys: Surrogate Primary Key (vet_id). license_number is UNIQUE because no two vets can share a medical license.
 
-**LIVESTOCK_REGISTRY**
-*   **Purpose:** Master table storing the permanent profile of every individual animal.
-*   **Normalization (3NF):** This table resolves repeating groups from daily logs. Animal-specific data (birth date, gender) is kept here, while daily metrics are pushed to child tables.
-*   **Keys:** Natural Primary Key (`tag_id`), as the Cattle_ID from Kaggle is unique. `sire_id` and `dam_id` are self-referencing Foreign Keys pointing to this same table.
+LIVESTOCK_REGISTRY
+Purpose: Master table storing the permanent profile of every individual animal.
+Normalization (3NF): This table resolves repeating groups from daily logs. Animal-specific data (birth date, gender) is kept here, while daily metrics are pushed to child tables.
+Keys: Natural Primary Key (tag_id), as the Cattle_ID from Kaggle is unique. sire_id and dam_id are self-referencing Foreign Keys pointing to this same table.
 
-**PRODUCTION_LOG**
-*   **Purpose:** Records the daily milk and meat yield for each animal.
-*   **Normalization (3NF):** Resolves repeating groups. Each row represents a single day's output for a single animal.
-*   **Keys:** Surrogate Primary Key (`log_id`). Contains a Composite Unique Constraint `UQ (tag_id, log_date)` to prevent entering two production logs for the same cow on the same day.
+PRODUCTION_LOG
+  Purpose: Records the daily milk and meat yield for each animal.
+   Normalization (3NF): Resolves repeating groups. Each row represents a single days output for a single animal.
+Keys: Surrogate Primary Key (log_id). Contains a Composite Unique Constraint UQ (tag_id, log_date) to prevent entering two production logs for the same cow on the same day.
 
-**HEALTH_INTERVENTIONS**
-*   **Purpose:** Tracks medical treatments, dates, and dosages.
-*   **Normalization (3NF):** Resolves repeating groups by logging each intervention as a separate row.
-*   **Keys:** Surrogate Primary Key (`intervention_id`). `vet_id` is nullable to allow `ON DELETE SET NULL` if a vet leaves the system.
+HEALTH_INTERVENTIONS
+Purpose: Tracks medical treatments, dates, and dosages.
+  Normalization (3NF): Resolves repeating groups by logging each intervention as a separate row.
+Keys: Surrogate Primary Key (intervention_id). vet_id is nullable to allow ON DELETE SET NULL if a vet leaves the system.
 
-**BREEDING_LOG**
-*   **Purpose:** Tracks insemination dates and pregnancies.
-*   **Normalization (3NF):** Separates the breeding event from the permanent animal profile.
-*   **Keys:** Surrogate Primary Key (`breeding_id`). `dam_id` is NOT NULL (every calf has a mother), while `sire_id` is optional.
+BREEDING_LOG
+Purpose: Tracks insemination dates and pregnancies.
+Normalization (3NF): Separates the breeding event from the permanent animal profile.
+Keys: Surrogate Primary Key (breeding_id). dam_id is NOT NULL (every calf has a mother), while sire_id is optional.
 
-**FEED_CONSUMPTION**
-*   **Purpose:** Tracks daily feed types, amounts, and costs per barn.
-*   **Normalization (3NF):** Separates feed logs from production logs.
-*   **Keys:** Surrogate Primary Key (`feed_log_id`).
+FEED_CONSUMPTION
+Purpose: Tracks daily feed types, amounts, and costs per barn.
+Normalization (3NF): Separates feed logs from production logs.
+Keys: Surrogate Primary Key (feed_log_id).
 
----
 
-## 2. Data Dictionary
+
+ 2. Data Dictionary
 
 ### FARM_UNITS
 | Column | Data type | Null? | Constraint | Why / description |
