@@ -9,7 +9,7 @@ Normalization (3NF):Location details depend solely on the Unit_ID. Storing this 
 BREED
 Purpose: Lookup table for cattle breeds (e.g., Holstein, Jersey).
 Normalization (3NF): In the raw data, the breed name was tied directly to the animal. By creating this table, breed_name depends only on breed_id, removing the transitive dependency (Breed Name -> Breed ID -> Animal).
-Keys: Surrogate Primary Key (`breed_id`).breed_name must be UNIQUE to prevent duplicate breed entries.
+Keys: Surrogate Primary Key (breed_id).breed_name must be UNIQUE to prevent duplicate breed entries.
 
 VETERINARIAN
 Purpose: Stores details of doctors who perform medical interventions.
@@ -119,7 +119,7 @@ Keys: Surrogate Primary Key (feed_log_id).
 
 ---
 
-## 3. Foreign Key Decision Table
+ 3. Foreign Key Decision Table
 
 | Foreign key name | Child table | Parent table | Rule chosen | What happens when the parent changes | When and why to apply it |
 |---|---|---|---|---|---|
@@ -128,12 +128,12 @@ Keys: Surrogate Primary Key (feed_log_id).
 | fk_prod_registry | PRODUCTION_LOG | LIVESTOCK_REGISTRY | ON DELETE CASCADE | Child production logs are deleted. | If a cow dies or is sold and removed from the registry, her production history should be deleted. |
 | fk_health_registry | HEALTH_INTERVENTIONS | LIVESTOCK_REGISTRY | ON DELETE CASCADE | Child health records are deleted. | Medical history is useless without the animal. |
 | fk_breed_dam | BREEDING_LOG | LIVESTOCK_REGISTRY | ON DELETE CASCADE | Child breeding logs are deleted. | If the mother is removed, the breeding record is deleted. |
-| fk_health_vet | HEALTH_INTERVENTIONS | VETERINARIAN | ON DELETE SET NULL | The `vet_id` in the child table is set to NULL. | If a vet leaves the farm, we do not want to lose the animal's medical history. The record stays, but the vet link is nullified. |
-| fk_breed_sire | BREEDING_LOG | LIVESTOCK_REGISTRY | ON DELETE SET NULL | The `sire_id` is set to NULL. | If the father's record is deleted, we keep the breeding log but mark the father as unknown (NULL). |
+| fk_health_vet | HEALTH_INTERVENTIONS | VETERINARIAN | ON DELETE SET NULL | The vet_id in the child table is set to NULL. | If a vet leaves the farm, we do not want to lose the animal's medical history. The record stays, but the vet link is nullified. |
+| fk_breed_sire | BREEDING_LOG | LIVESTOCK_REGISTRY | ON DELETE SET NULL | The sire_id is set to NULL. | If the father's record is deleted, we keep the breeding log but mark the father as unknown (NULL). |
 | fk_reg_breed | LIVESTOCK_REGISTRY | BREED | NO ACTION | Deletion is rejected with an error. | You should not be able to delete a breed (e.g., Holstein) if there are still cows registered under that breed. |
 
 ---
 
 ## 4. Handling Key Updates in Oracle
-Because Oracle does not support `ON UPDATE CASCADE` like MySQL or SQL Server, we handle primary key updates by enforcing immutability. 
-We chose **surrogate keys** (auto-generated identity numbers like `breed_id`, `log_id`) for our primary keys specifically so they never need to change. If a natural key (like `breed_name` or `license_number`) needs to be updated, we update that specific column directly, without affecting the relationships of the child tables. This prevents orphaned records and maintains referential integrity without needing cascade updates.
+Because Oracle does not support ON UPDATE CASCADE like MySQL or SQL Server, we handle primary key updates by enforcing immutability. 
+We chose surrogate keys (auto-generated identity numbers like breed_id, log_id) for our primary keys specifically so they never need to change. If a natural key (like breed_name or license_number) needs to be updated, we update that specific column directly, without affecting the relationships of the child tables. This prevents orphaned records and maintains referential integrity without needing cascade updates.
