@@ -4,7 +4,7 @@ Project: Livestock Production  Productivity Analysis System
 
 
 
-Foreign Keys & Delete Rules
+----Foreign Keys & Delete Rules
 ALTER TABLE livestock_registry ADD CONSTRAINT fk_reg_breed FOREIGN KEY (breed_id) REFERENCES breed(breed_id) ON DELETE NO ACTION;
 ALTER TABLE livestock_registry ADD CONSTRAINT fk_reg_unit FOREIGN KEY (unit_id) REFERENCES farm_units(unit_id) ON DELETE CASCADE;
 ALTER TABLE livestock_registry ADD CONSTRAINT fk_reg_sire FOREIGN KEY (sire_id) REFERENCES livestock_registry(tag_id) ON DELETE SET NULL;
