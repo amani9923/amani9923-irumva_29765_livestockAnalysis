@@ -6,7 +6,7 @@ Project: Livestock Production & Productivity Analysis System
 
 
 
-1. PARENT TABLES (Create these first)
+---1. PARENT TABLES (Create these first)
 CREATE TABLE farm_units (
     unit_id VARCHAR2(20) CONSTRAINT pk_farm_units PRIMARY KEY,
     unit_name VARCHAR2(50) CONSTRAINT nn_unit_name NOT NULL,
@@ -25,7 +25,7 @@ CREATE TABLE veterinarian (
     license_number VARCHAR2(30) CONSTRAINT uq_vet_license UNIQUE
 ) TABLESPACE livestock_data;
 
-2. CHILD TABLES
+---2. CHILD TABLES
 CREATE TABLE livestock_registry (
     tag_id VARCHAR2(20) CONSTRAINT pk_registry PRIMARY KEY,
     breed_id NUMBER CONSTRAINT nn_reg_breed NOT NULL,
